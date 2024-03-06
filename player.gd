@@ -42,4 +42,4 @@ func _on_body_entered(body):
 func start(pos):
 	position = pos;
 	show();
-	$Collider.disabled = 
+	$Collider.disabled = false;

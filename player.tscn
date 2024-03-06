@@ -38,7 +38,6 @@ height = 136.0
 [node name="Player" type="Area2D"]
 position = Vector2(214, 258)
 script = ExtResource("1_w5p87")
-speed = null
 metadata/_edit_group_ = true
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]

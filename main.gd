@@ -4,21 +4,31 @@ extends Node
 var score : int;
 
 func _ready():
-	print_tree_pretty();
+	$UHD.update_score(0);
 	$Player.hit.connect(on_player_hit);
 	$ScoreTimer.timeout.connect(on_score_timer);
 	$StartTimer.timeout.connect(on_start_timer_timeout);
 	$MobTimer.timeout.connect(on_mob_timer_timeout);
-	new_game();
+	$UHD/StartButton.pressed.connect(new_game);
+	$UHD.show_message("Dodge the Creeps!");
 
 func game_over():
+	get_tree().call_group("mobs", "queue_free");
+	$UHD.show_game_over();
 	$ScoreTimer.stop();
 	$MobTimer.stop();
+	$Music.stop();
+	$DeathSound.play();
 	
 func new_game():
 	score = 0;
+	$UHD.update_score(score);
+	$UHD.show_message("Get Ready...");
+	$UHD/StartButton.hide();
 	$Player.start($StartPosition.position);
 	$StartTimer.start();
+	if not $Music.playing:
+		$Music.play();
 
 func on_start_timer_timeout():
 	$MobTimer.start();
@@ -29,6 +39,7 @@ func on_player_hit():
 	
 func on_score_timer():
 	score += 1;
+	$UHD.update_score(score);
 	
 func on_mob_timer_timeout():
 	var mob = mob_scene.instantiate();

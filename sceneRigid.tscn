@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cofxymfcdrm8d"]
+
+[ext_resource type="Texture2D" uid="uid://8ii0uanqdpx6" path="res://icon.svg" id="1_edjav"]
+[ext_resource type="Script" path="res://SpriteMove.gd" id="2_4ermh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 347.0
+offset_top = 261.0
+offset_right = 433.0
+offset_bottom = 317.0
+text = "Toggle Motion"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(766, 323)
+texture = ExtResource("1_edjav")
+script = ExtResource("2_4ermh")
+
+[node name="VisibilityTimer" type="Timer" parent="Sprite2D"]
+wait_time = 10.0
+autostart = true
+
+[connection signal="pressed" from="Button" to="Sprite2D" method="_on_toggle_motion_pressed"]
